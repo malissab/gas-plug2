@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+import GasByStateList from './GasByStateList';
 import './App.css';
 
 function App() {
+
+  const [getGas, setGetGas] = useState([])
+
+  useEffect(() => {
+    fetch("https://api.collectapi.com/gasPrice/allUsaPrice", {
+      "method": "GET",
+      "headers": {
+        'authorization': 'apikey 61YoyeUPbry0lXwqSb3h9b:5kEtadptD9hNWnzEROsO57',
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      setGetGas(data.result)
+      })
+    }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GasByStateList getGas={getGas}/>
     </div>
   );
 }
