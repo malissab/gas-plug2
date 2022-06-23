@@ -4,7 +4,8 @@ import GasDetail from './GasDetail.js'
 function GasByStateList({ getGas }) {
 
     const allStates = getGas.map((state) => (
-        <GasDetail key={state.id} name={state.name} regular={state.regular} premium={state.premium}/>
+        <GasDetail key={state.id} name={state.name} regular={state.regular} 
+        midGrade={state.midGrade} premium={state.premium} diesel={state.diesel}/>
     ));
 
   return (
